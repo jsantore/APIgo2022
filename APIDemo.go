@@ -9,10 +9,7 @@ import (
 )
 
 func main() {
-	fmt.Println("What University should we search for:")
-	var univName string
-	fmt.Scan(&univName)
-	apiURL := fmt.Sprintf("http://universities.hipolabs.com/search?name=%s", univName)
+	apiURL := "http://universities.hipolabs.com/search?name=young"
 	response, err := http.Get(apiURL)
 	if err != nil {
 		fmt.Println("Error getting internet response.....\nCowardly quitting.....\n")
@@ -24,11 +21,11 @@ func main() {
 		fmt.Println("Error reading response body")
 		return
 	}
-	universities := make([]UniversityResponse, 2)
+	universities := make([]UniversityResponse, 10, 20)
 	if err = json.Unmarshal(bodyData, &universities); err != nil {
 		fmt.Println("Error - could not translate json data to struct properly")
 	}
 	for _, univData := range universities {
-		univData.prettyPrint()
+		fmt.Println(univData)
 	}
 }
