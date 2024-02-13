@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 )
@@ -16,7 +16,7 @@ func main() {
 		os.Exit(-1)
 	}
 	defer response.Body.Close()
-	bodyData, err := ioutil.ReadAll(response.Body)
+	bodyData, err := io.ReadAll(response.Body)
 	if err != nil {
 		fmt.Println("Error reading response body")
 		return
